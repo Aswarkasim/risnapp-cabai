@@ -26,8 +26,8 @@ class Diagnosa extends CI_Controller
     {
         $valid = $this->form_validation;
         $valid->set_rules(
-            'nama_pasien',
-            'Nama Pasien',
+            'nama_Konsultasi',
+            'Nama Konsultasi',
             'required',
             array('required' => ' %s harus diisi')
         );
@@ -49,7 +49,7 @@ class Diagnosa extends CI_Controller
         } else {
             $i = $this->input;
             $data = array(
-                'nama_pasien'     => $i->post('nama_pasien'),
+                'nama_Konsultasi'     => $i->post('nama_Konsultasi'),
                 'jenis_kelamin'   => $i->post('jenis_kelamin'),
                 'tgl_lahir'            => $i->post('tgl_lahir'),
                 'umur'            => $i->post('umur'),
@@ -62,12 +62,27 @@ class Diagnosa extends CI_Controller
 
     public function ask()
     {
+        $this->load->helper('string');
 
 
+        $cek = $this->HM->checkKonsultasi();
+
+        $id_konsultasi = '';
+
+        if ($cek == null) {
+            $dataKonsul = [
+                'id_konsultasi'     => random_string('numeric', '15'),
+            ];
+            $this->Crud_model->add('tbl_konsultasi', $dataKonsul);
+            $id_konsultasi = $dataKonsul['id_konsultasi'];
+        } else {
+            $id_konsultasi = $cek->id_konsultasi;
+        }
 
         $ask = $this->HM->listPengetahuan();
         $data = array(
             'ask'             => $ask,
+            'id_konsultasi'    => $id_konsultasi,
             'content'         => 'diagnosa/ask'
         );
         $this->load->view('layout/wrapper', $data);
@@ -80,78 +95,125 @@ class Diagnosa extends CI_Controller
         redirect('home/diagnosa/rekapJawaban/' . $id);
     }
 
-    public function proses($kode_penyakit)
+    public function proses($id_konsultasi)
     {
-        $this->load->helper('string');
+
 
         $i = $this->input;
-        $dataPasien = [
-            'id_pasien'     => random_string('numeric', '15'),
-            'nama_pasien'   => $i->post('nama_pasien'),
-            'umur'          => $i->post('umur'),
-            'kode_penyakit'          => $i->post('kode_penyakit'),
-            'jenis_kelamin' => $i->post('jenis_kelamin')
-        ];
-        $this->Crud_model->add('tbl_pasien', $dataPasien);
 
-        $ask = $this->HM->listPengetahuan($kode_penyakit);
-        // $penyakit = $this->Crud_model->listingOne('tbl_jenis', 'kode_penyakit', $kode_penyakit);
-
+        $ask = $this->HM->listPengetahuan();
         foreach ($ask as $row) {
             $kode_pengetahuan = 'kode_pengetahuan' . $row->kode_pengetahuan;
-            $jawab = 'jawabPasien' . $row->kode_pengetahuan;
+            $jawab = 'jawabKonsultasi' . $row->kode_pengetahuan;
             $postJawab = $i->post($jawab);
             $cf_hasil_kali = $postJawab * $row->cf_root;
             $diagnosa = [
-                'id_pasien'     => $dataPasien['id_pasien'],
+                'id_konsultasi'     => $id_konsultasi,
                 'kode_pengetahuan' => $i->post($kode_pengetahuan),
                 'nilai_cf'      => $postJawab,
+                'kode_jenis'      => $row->kode_jenis,
                 'cf_hasil'      => $cf_hasil_kali
             ];
             $this->Crud_model->add('tbl_diagnosa', $diagnosa);
         }
 
-        redirect('home/diagnosa/rekapJawaban/' . $dataPasien['id_pasien'] . '/' . $kode_penyakit);
+        redirect('home/diagnosa/rekapJawaban/' . $id_konsultasi);
     }
 
-    function rekapJawaban($id_pasien, $kode_penyakit)
+    function rekapJawaban($id_konsultasi)
     {
-        $dataInput = $this->HM->listDiagnosaPasien($id_pasien);
-        $dataPasien = $this->Crud_model->listingOne('tbl_pasien', 'id_pasien', $id_pasien);
-        $penyakit = $this->Crud_model->listingOne('tbl_jenis', 'kode_jenis', $kode_penyakit);
+        $dataDiagnosa = $this->HM->listDiagnosaKonsultasi($id_konsultasi);
+        $dataKonsultasi = $this->Crud_model->listingOne('tbl_Konsultasi', 'id_konsultasi', $id_konsultasi);
+        $jenis = $this->Crud_model->listing('tbl_jenis');
+
+        $cf_max = 0;
+        $kode_jenis = '';
+
+        // die;
+        foreach ($jenis as $key => $row) {
+            $jenis = $this->Crud_model->listingOneAll('tbl_diagnosa', 'kode_jenis', $row->kode_jenis);
+            $cf_hasil = $this->hitung_cf($jenis);
+
+
+            // echo $key . ' ' . $cf_hasil . '<br>';
+
+            if ($cf_max <= $cf_hasil) {
+                $cf_max = $cf_hasil;
+                $kode_jenis = $row->kode_jenis;
+            }
+        }
+
+        // echo $cf_max;
+        // echo $kode_jenis;
+
+        $penyakit = $this->Crud_model->listingOne('tbl_jenis', 'kode_jenis', $kode_jenis);
+
+        // die;
+
         $data = [
-            'id_pasien' => $id_pasien,
+            'id_konsultasi' => $id_konsultasi,
             'penyakit'      => $penyakit,
-            'data'      => $dataInput,
-            'dataPasien' => $dataPasien,
-            'kode_penyakit' => $kode_penyakit,
+            'persentase'        => $cf_max,
+            'data'      => $dataDiagnosa,
+            'dataKonsultasi' => $dataKonsultasi,
+            // 'kode_penyakit' => $kode_penyakit,
             'content' => 'diagnosa/proses'
         ];
         $this->load->view('layout/wrapper', $data);
     }
 
-    function simpanDiagnosaPasien($id_pasien, $kode_penyakit)
+    private function hitung_cf($data)
+    {
+
+        $i = 0;
+        $cf_1 = 0;
+        $cf_2 = 0;
+        $cf_old = 0;
+        foreach ($data as $key => $value) {
+
+            if ($key == 0) {
+                $cf_1 = $value->cf_hasil;
+            }
+            if ($key == 1) {
+                $cf_2 = $value->cf_hasil;
+            }
+        }
+        $cf_old = $cf_1 + $cf_2 * (1 - $cf_1);
+        //echo $cf_old . '</br>';
+
+        foreach ($data as $key => $value) {
+            $cf_old = $cf_old + $value->cf_hasil * (1 - $cf_old);
+            //echo $cf_old . '</br>';
+        }
+        // echo $cf_old . '</br>';
+
+        $persentase = $cf_old * 100;
+        // echo $persentase;
+        return $persentase;
+    }
+
+    function simpanDiagnosaKonsultasi($id_konsultasi, $kode_penyakit)
     {
         $data = [
-            'id_pasien'         => $id_pasien,
+            'id_konsultasi'         => $id_konsultasi,
             'akumulasi_cf'      => $this->input->post('akumulasi_cf'),
             'kode_penyakit'     => $this->input->post('kode_penyakit'),
             'tingkat'     => $this->input->post('tingkat'),
             'nama_penyakit'     => $this->input->post('nama_penyakit')
         ];
-        $this->Crud_model->edit('tbl_pasien', 'id_pasien', $id_pasien, $data);
+        $this->Crud_model->edit('tbl_Konsultasi', 'id_konsultasi', $id_konsultasi, $data);
 
         $this->session->set_flashdata('msg', 'Data disimpan');
 
-        redirect('home/diagnosa/rekapJawaban/' . $id_pasien . '/' . $kode_penyakit);
+        redirect('home/diagnosa/rekapJawaban/' . $id_konsultasi . '/' . $kode_penyakit);
     }
 
-    function hapusData($id_pasien)
+    function hapusData($id_konsultasi)
     {
-        $this->Crud_model->delete('tbl_pasien', 'id_pasien', $id_pasien);
-        $pasien = $this->Crud_model->listingOneAll('tbl_diagnosa', 'id_pasien', $id_pasien);
-        foreach ($pasien as $row) {
-            $this->Crud_model->delete('tbl_diagnosa', 'id_pasien', $id_pasien);
+        $this->Crud_model->delete('tbl_Konsultasi', 'id_konsultasi', $id_konsultasi);
+        $Konsultasi = $this->Crud_model->listingOneAll('tbl_diagnosa', 'id_konsultasi', $id_konsultasi);
+        foreach ($Konsultasi as $row) {
+            $this->Crud_model->delete('tbl_diagnosa', 'id_konsultasi', $id_konsultasi);
         }
         $this->session->set_flashdata('msg', 'Data dihapus');
         redirect('home/diagnosa');
@@ -159,9 +221,9 @@ class Diagnosa extends CI_Controller
 
 
 
-    function cetak($id_pasien)
+    function cetak($id_konsultasi)
     {
-        $data['data'] = $this->HM->pasien($id_pasien);
+        $data['data'] = $this->HM->Konsultasi($id_konsultasi);
         $data['konfigurasi'] = $this->Crud_model->listingOne('tbl_konfigurasi', 'id_konfigurasi', '1');
         $this->load->view('home/diagnosa/cetak', $data, FALSE);
     }

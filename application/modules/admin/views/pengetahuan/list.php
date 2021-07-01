@@ -18,7 +18,7 @@
         <thead>
           <tr>
             <th width="20px">NO</th>
-            <th>JENIS DIARE</th>
+            <th>JENIS PENYAKIT</th>
             <th>GEJALA</th>
             <th>PERTANYAAN</th>
             <th>NILAI CF</th>

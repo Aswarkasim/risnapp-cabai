@@ -5,7 +5,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>SISTEM PAKAR DIARE || Home</title>
+    <title>SISTEM PAKAR PENYAKIT CABAI || Home</title>
     <link rel="icon" href="">
     <!-- Bootstrap CSS -->
     <link rel=" stylesheet" href="<?= base_url('assets/home/') ?>css/bootstrap.css">

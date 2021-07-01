@@ -26,7 +26,7 @@
                                     <select name="kode_jenis" class="form-control select2">
                                         <option value="">--Jenis--</option>
                                         <?php foreach ($jenis as $row) { ?>
-                                            <option value="<?= $row->kode_jenis ?>"><?= $row->nama_jenis ?></option>
+                                            <option value="<?= $row->kode_jenis ?>"><?= $row->kode_jenis . ' - ' . $row->nama_jenis ?></option>
                                         <?php } ?>
                                     </select>
                                 </div>
