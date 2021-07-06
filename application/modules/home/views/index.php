@@ -32,9 +32,9 @@
     </center>
 
     <div class="row">
-        <div class="col-md-5">a</div>
+        <div class="col-md-5"></div>
         <div class="col-md-6">
-            <p><?= $konfigurasi->tentang; ?></p>
+            <p class=""><?= $konfigurasi->tentang; ?></p>
         </div>
     </div>
 

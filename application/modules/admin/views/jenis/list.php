@@ -36,7 +36,7 @@ $this->load->helper('text');
             <tr>
               <td><?= $no ?></td>
               <td><?= $row->kode_jenis ?></td>
-              <td><a href="<?= base_url('admin/jenis/detail/' . $row->kode_jenis); ?>"><strong><?= $row->nama_jenis ?></strong></a></td>
+              <td><a href="#"><strong><?= $row->nama_jenis ?></strong></a></td>
               <td>
                 <div class="btn-group">
                   <button type="button" class="btn btn-danger btn-flat"><i class="fa fa-cogs"></i></button>
