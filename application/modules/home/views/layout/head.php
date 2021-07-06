@@ -2,19 +2,20 @@
 <html lang="en">
 
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>SISTEM PAKAR PENYAKIT CABAI || Home</title>
-    <link rel="icon" href="">
-    <!-- Bootstrap CSS -->
-    <link rel=" stylesheet" href="<?= base_url('assets/home/') ?>css/bootstrap.css">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="<?= base_url('assets/admin/') ?>bower_components/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="<?= base_url('assets/home/') ?>css/style.css">
-    <link rel="stylesheet" href="<?= base_url('assets/home/') ?>css/custom.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+  <meta name="generator" content="Hugo 0.84.0">
+  <title>SISTEM PAKAR DIAGNOSA PENYAKIT CABAI</title>
 
-    <script src="<?= base_url('assets/admin/') ?>bower_components/jquery/dist/jquery.min.js"></script>
-</head>
+  <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/headers/">
 
-<body>
+
+
+  <!-- Bootstrap core CSS -->
+  <link href="<?= base_url('assets/home/'); ?>css/bootstrap-mytheme.css" rel="stylesheet">
+  <link rel="stylesheet" href="<?= base_url('assets/admin/') ?>bower_components/font-awesome/css/font-awesome.min.css">
+
+
+  <meta name="theme-color" content="#7952b3">

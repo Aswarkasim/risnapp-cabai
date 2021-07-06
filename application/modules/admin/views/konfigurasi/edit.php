@@ -49,6 +49,17 @@
                     <div class="form-group">
                         <div class="row">
                             <div class="col-md-3">
+                                <label for="" class="pull-right">Email</label>
+                            </div>
+                            <div class="col-md-9">
+                                <input type="text" value="<?= $konfigurasi->email ?>" name="email" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-3">
                                 <label for="" class="pull-right">Provinsi</label>
                             </div>
                             <div class="col-md-9">
@@ -83,6 +94,17 @@
                             </div>
                             <div class="col-md-9">
                                 <input type="text" value="<?= $konfigurasi->alamat ?>" name="alamat" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label for="" class="pull-right">Deskripsi Singkat</label>
+                            </div>
+                            <div class="col-md-9">
+                                <textarea name="deskripsi" class="form-control" id="" cols="30" rows="10"><?= $konfigurasi->deskripsi; ?></textarea>
                             </div>
                         </div>
                     </div>

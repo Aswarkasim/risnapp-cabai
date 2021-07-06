@@ -18,6 +18,23 @@
                 <span class="text-danger"><?= $persentase . '%' ?></span>
             </div>
             <hr>
+
+            <div class="form-group">
+                <label for=""><strong>DESKRIPSI</strong></label><br>
+                <span class=""><?= $penyakit->deskripsi ?></span>
+            </div>
+            <hr>
+
+            <div class="form-group">
+                <label for=""><strong>GAMBAR</strong></label><br>
+                <span class="">
+                    <img src="<?= base_url($penyakit->gambar); ?>" alt="">
+                </span>
+            </div>
+            <hr>
+
+
+
             <!-- <div class="float-right">
                 <form action="<?= base_url('home/diagnosa/simpanDiagnosaKonsultasi/' . $id_konsultasi . '/' . $kode_penyakit); ?>" method="post">
                     <input type="hidden" value="<?= $persentase; ?>" name="akumulasi_cf">

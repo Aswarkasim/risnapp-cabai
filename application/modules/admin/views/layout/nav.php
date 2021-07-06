@@ -39,7 +39,7 @@ $role = $this->session->userdata('role');
                                 echo "active";
                             }
                             ?>"><a href="<?php echo base_url('admin/pasien')
-                                        ?>"><i class="fa fa-hotel"></i> <span>Riwayat Konsultasi</span></a></li> -->
+                                            ?>"><i class="fa fa-hotel"></i> <span>Riwayat Konsultasi</span></a></li> -->
 
 
 
@@ -76,6 +76,9 @@ $role = $this->session->userdata('role');
                     <li class="<?php if ($this->uri->segment(3) == "panduan") {
                                     echo "active";
                                 } ?>"><a href="<?= base_url('admin/konfigurasi/panduan') ?>">Panduan</a></li>
+                    <li class="<?php if ($this->uri->segment(3) == "tentang") {
+                                    echo "active";
+                                } ?>"><a href="<?= base_url('admin/konfigurasi/tentang') ?>">Tentang</a></li>
                 </ul>
             </li>
 

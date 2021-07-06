@@ -141,6 +141,8 @@ class Diagnosa extends CI_Controller
                 $cf_max = $cf_hasil;
                 $kode_jenis = $row->kode_jenis;
             }
+
+            // echo $cf_hasil;
         }
 
         // echo $cf_max;
@@ -149,6 +151,13 @@ class Diagnosa extends CI_Controller
         $penyakit = $this->Crud_model->listingOne('tbl_jenis', 'kode_jenis', $kode_jenis);
 
         // die;
+
+        $dataKonsultasi = [
+            'akumulasi_cf' => $cf_max,
+            'kode_penyakit' => $penyakit->kode_jenis,
+            'nama_penyakit' => $penyakit->nama_jenis
+        ];
+        $this->Crud_model->edit('tbl_konsultasi', 'id_konsultasi', $id_konsultasi, $dataKonsultasi);
 
         $data = [
             'id_konsultasi' => $id_konsultasi,

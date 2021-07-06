@@ -21,7 +21,7 @@
                             //   }
                             ?>
                             <div class="row">
-                                <div class="col-md-3"><strong>JENIS DIARE <small class="text-danger">*</small><span class="pull-right">:</span></strong></div>
+                                <div class="col-md-3"><strong>JENIS PENYAKIT/ HAMA <small class="text-danger">*</small><span class="pull-right">:</span></strong></div>
                                 <div class="col-md-9">
                                     <select name="kode_jenis" class="form-control select2">
                                         <option value="">--Jenis--</option>

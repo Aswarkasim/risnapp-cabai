@@ -6,7 +6,8 @@
         <!-- /.box-header -->
         <div class="box-body no-padding">
 
-            <form action="<?= base_url($add) ?>" method="post">
+            <?= form_open_multipart(base_url($add)) ?>
+            <form action="" method="post">
                 <div class="row">
                     <div class="col-md-6">
                         <?php
@@ -27,6 +28,13 @@
                             <div class="col-md-3"><strong>NAMA PENYAKIT <small class="text-danger">*</small><span class="pull-right">:</span></strong></div>
                             <div class="col-md-9">
                                 <input type="text" class="form-control" name="nama">
+                            </div>
+                        </div><br>
+
+                        <div class="row">
+                            <div class="col-md-3"><strong>GAMBAR <small class="text-danger">*</small><span class="pull-right">:</span></strong></div>
+                            <div class="col-md-9">
+                                <input type="file" class="form-control" name="gambar">
                             </div>
                         </div><br>
 
@@ -79,6 +87,7 @@
                     </div>
                 </div><br>
             </form>
+            <?= form_close() ?>
         </div>
     </div>
     <!-- /.box-body -->

@@ -9,8 +9,10 @@ class Home extends CI_Controller
     public function index()
     {
         $konfigurasi = $this->Crud_model->listingOne('tbl_konfigurasi', 'id_konfigurasi', '1');
+        $banner = $this->Crud_model->listing('tbl_banner');
         $data = [
-            'data'    => $konfigurasi,
+            'konfigurasi'    => $konfigurasi,
+            'banner'    => $banner,
             'content' => 'home/index'
         ];
 

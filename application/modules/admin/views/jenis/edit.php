@@ -5,8 +5,8 @@
         </div>
         <!-- /.box-header -->
         <div class="box-body no-padding">
-
-            <form action="<?= base_url($edit) ?>" method="post">
+            <?= form_open_multipart(base_url($edit . $jenis->kode_jenis)) ?>
+            <form action="" method="post">
                 <div class="row">
                     <div class="col-md-6">
                         <?php
@@ -31,46 +31,22 @@
                         </div><br>
 
                         <div class="row">
+                            <div class="col-md-3"><strong>GAMBAR <small class="text-danger">*</small><span class="pull-right">:</span></strong></div>
+                            <div class="col-md-9">
+                                <input type="file" class="form-control" name="gambar"><br>
+                                <img src="<?= base_url($jenis->gambar); ?>" width="50%" alt="">
+                            </div>
+                        </div><br>
+
+
+                        <div class="row">
                             <div class="col-md-3"><strong>Deskripsi <small class="text-danger">*</small><span class="pull-right">:</span></strong></div>
                             <div class="col-md-9">
                                 <textarea name="deskripsi" id="" class="form-control" cols="30" rows="10"><?= $jenis->deskripsi; ?></textarea>
                             </div>
                         </div><br>
 
-                        <!---  <div class="row">
-                            <div class="col-md-3"><strong>PERBANDINGAN <small class="text-danger">*</small><span class="pull-right">:</span></strong></div>
-                            <div class="col-md-9">
-                                <select name="banding" required class="form-control" id="">
-                                    <option value="">--Option--</option>
-                                    <option value=">" <?php if ($jenis->banding == '>') {
-                                                            echo 'selected';
-                                                        } ?>>></option>
-                                    <option value="<" <?php if ($jenis->banding == '<') {
-                                                            echo 'selected';
-                                                        } ?>>
-                                        <</option> <option value="<=" <?php if ($jenis->banding == '<=') {
-                                                                            echo 'selected';
-                                                                        } ?>>
-                                            <=</option> <option value=">=" <?php if ($jenis->banding == '>=') {
-                                                                                echo 'selected';
-                                                                            } ?>>>=
-                                    </option>
-                                </select>
-                            </div>
-                        </div><br>
-                        <div class="row">
-                            <div class="col-md-3"><strong>PARAMETER <small class="text-danger">*</small><span class="pull-right">:</span></strong></div>
-                            <div class="col-md-9">
-                                <input type="text" class="form-control" name="parameter" value="<?= $jenis->parameter ?>">
-                            </div>
-                        </div><br>
-                        <script src="<?= base_url('assets/') ?>js/ckeditor/ckeditor.js"></script>
-                        <div class="row">
-                            <div class="col-md-3"><strong>PENANGANAN <small class="text-danger">*</small><span class="pull-right">:</span></strong></div>
-                            <div class="col-md-9">
-                                <textarea name="penanganan" id="editor" cols="30" rows="10"><?= $jenis->penanganan; ?></textarea>
-                            </div>
-                        </div><br> -->
+
 
                         <div class="row">
                             <div class="col-md-12">
@@ -87,6 +63,8 @@
 
                 </div>
             </form>
+
+            <?= form_close() ?>
         </div>
         <!-- /.box-body -->
     </div>

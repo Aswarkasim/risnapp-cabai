@@ -1,5 +1,5 @@
 <section class="jumbotron">
-    <div class="container">
+    <div class="container mb-3">
         <form action="<?= base_url('home/diagnosa/proses/' . $id_konsultasi) ?>" method="post" class="form-signin">
 
 

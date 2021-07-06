@@ -21,7 +21,7 @@
             <th>KODE</th>
             <th>NAMA</th>
             <th>NILAI CF</th>
-            <th></th>
+            <th width="100px"></th>
           </tr>
         </thead>
         <tbody>
