@@ -123,7 +123,7 @@ class Diagnosa extends CI_Controller
     function rekapJawaban($id_konsultasi)
     {
         $dataDiagnosa = $this->HM->listDiagnosaKonsultasi($id_konsultasi);
-        $dataKonsultasi = $this->Crud_model->listingOne('tbl_Konsultasi', 'id_konsultasi', $id_konsultasi);
+        $dataKonsultasi = $this->Crud_model->listingOne('tbl_konsultasi', 'id_konsultasi', $id_konsultasi);
         $jenis = $this->Crud_model->listing('tbl_jenis');
 
         $cf_max = 0;
@@ -210,7 +210,7 @@ class Diagnosa extends CI_Controller
             'tingkat'     => $this->input->post('tingkat'),
             'nama_penyakit'     => $this->input->post('nama_penyakit')
         ];
-        $this->Crud_model->edit('tbl_Konsultasi', 'id_konsultasi', $id_konsultasi, $data);
+        $this->Crud_model->edit('tbl_konsultasi', 'id_konsultasi', $id_konsultasi, $data);
 
         $this->session->set_flashdata('msg', 'Data disimpan');
 
@@ -219,7 +219,7 @@ class Diagnosa extends CI_Controller
 
     function hapusData($id_konsultasi)
     {
-        $this->Crud_model->delete('tbl_Konsultasi', 'id_konsultasi', $id_konsultasi);
+        $this->Crud_model->delete('tbl_konsultasi', 'id_konsultasi', $id_konsultasi);
         $Konsultasi = $this->Crud_model->listingOneAll('tbl_diagnosa', 'id_konsultasi', $id_konsultasi);
         foreach ($Konsultasi as $row) {
             $this->Crud_model->delete('tbl_diagnosa', 'id_konsultasi', $id_konsultasi);
