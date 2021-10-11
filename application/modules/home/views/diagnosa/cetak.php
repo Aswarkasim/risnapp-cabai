@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Cetak <?= $data->nama_pasien ?></title>
+  <title>Cetak Data</title>
   <link rel=" stylesheet" href="<?= base_url('assets/home/') ?>css/bootstrap.css">
   <style type="text/css">
     /* body {
@@ -50,24 +50,14 @@
     <table class="table">
       <tr>
         <td align="right" width="200px">Nama :</td>
-        <td><?= $data->nama_pasien; ?></td>
+        <td><?= $data->nama_konsultasi; ?></td>
       </tr>
-      <tr>
-        <td align="right" width="200px">Jenis Kelamin :</td>
-        <td><?= $data->jenis_kelamin; ?></td>
-      </tr>
-      <tr>
-        <td align="right" width="200px">Umur :</td>
-        <td><?= $data->umur . ' Tahun'; ?></td>
-      </tr>
+
       <tr>
         <td align="right" width="200px">Diagnosa :</td>
         <td><?= $data->nama_penyakit; ?></td>
       </tr>
-      <tr>
-        <td align="right" width="200px">Tingkat :</td>
-        <td><?= $data->tingkat; ?></td>
-      </tr>
+
       <tr>
         <td align="right" width="200px">Keakuratan :</td>
         <td><?= $data->akumulasi_cf . ' %'; ?></td>

@@ -10,8 +10,6 @@
         <a href="<?= base_url($add) ?>" class="btn btn-primary"><i class="fa fa-plus"></i> Tambah</a>
       </p>
 
-      <div class="flash-data" data-flashdata="<?= $this->session->flashdata('msg') ?>"></div>
-
 
 
       <table class="table table table-bordered table-striped DataTable">

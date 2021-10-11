@@ -1,7 +1,9 @@
 <section class="jumbotron">
-    <div class="container mb-3">
+    <div class="container mb-3" style="max-width: 1100px;">
         <form action="<?= base_url('home/diagnosa/proses/' . $id_konsultasi) ?>" method="post" class="form-signin">
 
+
+            <!-- <a href="">Buat Konsultasi Baru</a> -->
 
             <hr>
             <h3><b>Pilih Gejala</b></h3>

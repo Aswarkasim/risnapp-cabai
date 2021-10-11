@@ -3,7 +3,7 @@ $id_user = $this->session->userdata('id_user');
 $user = $this->Crud_model->listingOne('tbl_user', 'id_user', $id_user);
 
 ?>
-<div class="flash-data" data-flashdata="<?= $this->session->flashdata('msg') ?>"></div>
+<!-- <div class="flash-data" data-flashdata="<?= $this->session->flashdata('msg') ?>"></div> -->
 <div class="gagal" data-flashdata="<?= $this->session->flashdata('msg_er') ?>"></div>
 <header class="main-header">
     <!-- Logo -->

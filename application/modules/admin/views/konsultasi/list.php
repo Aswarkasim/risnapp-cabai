@@ -18,27 +18,21 @@
         <thead>
           <tr>
             <th width="30px">NO</th>
-            <th width="">NAMA PASIEN</th>
-            <th width="">JENIS KELAMIN</th>
-            <th width="">UMUR</th>
+            <th width="">TITLE</th>
             <th width="">AKUMULASI CF</th>
             <th width="">DIAGNOSA</th>
-            <th width="">TINGKAT</th>
             <th width="100px">ACTION</th>
           </tr>
         </thead>
         <tbody>
 
           <?php $no = 1;
-          foreach ($pasien as $row) { ?>
+          foreach ($konsultasi as $row) { ?>
             <tr>
               <td><?= $no ?></td>
-              <td><?= $row->nama_pasien . '<br>' . $row->tgl_update ?></td>
-              <td><?= $row->jenis_kelamin ?></td>
-              <td><?= $row->umur ?></td>
+              <td><?= $row->nama_konsultasi ?></td>
               <td><?= $row->akumulasi_cf ?></td>
               <td><?= $row->nama_penyakit ?></td>
-              <td><?= $row->tingkat ?></td>
               <td>
                 <div class="btn-group">
                   <button type="button" class="btn btn-danger btn-flat"><i class="fa fa-cogs"></i></button>
@@ -46,8 +40,8 @@
                     <span class="caret"></span>
                   </button>
                   <ul class="dropdown-menu" role="menu">
-                    <li> <a href="<?= base_url('home/diagnosa/cetak/' . $row->id_pasien); ?>" target="_blank"><i class="fa fa-save"></i> Cetak</a></li>
-                    <li><a href="<?= base_url($delete . $row->id_pasien) ?>" class="tombol-hapus"><i class="fa fa-trash"></i>Hapus</a></li>
+                    <li> <a href="<?= base_url('home/diagnosa/cetak/' . $row->id_konsultasi); ?>" target="_blank"><i class="fa fa-save"></i> Cetak</a></li>
+                    <li><a href="<?= base_url($delete . $row->id_konsultasi) ?>" class="tombol-hapus"><i class="fa fa-trash"></i>Hapus</a></li>
                   </ul>
                 </div>
               </td>

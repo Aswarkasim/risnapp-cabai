@@ -46,6 +46,13 @@
                             </div>
                         </div><br>
 
+                        <div class="row">
+                            <div class="col-md-3"><strong>Penanganan <small class="text-danger">*</small><span class="pull-right">:</span></strong></div>
+                            <div class="col-md-9">
+                                <textarea name="penanganan" id="" class="form-control" cols="30" rows="10"><?= $jenis->penanganan; ?></textarea>
+                            </div>
+                        </div><br>
+
 
 
                         <div class="row">

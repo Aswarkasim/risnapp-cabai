@@ -1,5 +1,3 @@
-<div class="flash-data" data-flashdata="<?= $this->session->flashdata('msg') ?>"></div>
-
 <div class="row">
     <div class="col-md-6">
         <div class="box">

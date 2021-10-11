@@ -123,7 +123,7 @@ class Diagnosa extends CI_Controller
     function rekapJawaban($id_konsultasi)
     {
         $dataDiagnosa = $this->HM->listDiagnosaKonsultasi($id_konsultasi);
-        $dataKonsultasi = $this->Crud_model->listingOne('tbl_konsultasi', 'id_konsultasi', $id_konsultasi);
+        $konsultasi = $this->Crud_model->listingOne('tbl_konsultasi', 'id_konsultasi', $id_konsultasi);
         $jenis = $this->Crud_model->listing('tbl_jenis');
 
         $cf_max = 0;
@@ -165,6 +165,7 @@ class Diagnosa extends CI_Controller
             'persentase'        => $cf_max,
             'data'      => $dataDiagnosa,
             'dataKonsultasi' => $dataKonsultasi,
+            'konsultasi' => $konsultasi,
             // 'kode_penyakit' => $kode_penyakit,
             'content' => 'diagnosa/proses'
         ];
@@ -201,20 +202,30 @@ class Diagnosa extends CI_Controller
         return $persentase;
     }
 
-    function simpanDiagnosaKonsultasi($id_konsultasi, $kode_penyakit)
+    // function simpanDiagnosaKonsultasi($id_konsultasi, $kode_penyakit)
+    // {
+    //     $data = [
+    //         'id_konsultasi'         => $id_konsultasi,
+    //         'akumulasi_cf'      => $this->input->post('akumulasi_cf'),
+    //         'kode_penyakit'     => $this->input->post('kode_penyakit'),
+    //         'tingkat'     => $this->input->post('tingkat'),
+    //         'nama_penyakit'     => $this->input->post('nama_penyakit')
+    //     ];
+    //     $this->Crud_model->edit('tbl_konsultasi', 'id_konsultasi', $id_konsultasi, $data);
+
+    //     $this->session->set_flashdata('msg', 'Data disimpan');
+
+    //     redirect('home/diagnosa/rekapJawaban/' . $id_konsultasi . '/' . $kode_penyakit);
+    // }
+
+    function simpanHasil($id_konsultasi)
     {
         $data = [
-            'id_konsultasi'         => $id_konsultasi,
-            'akumulasi_cf'      => $this->input->post('akumulasi_cf'),
-            'kode_penyakit'     => $this->input->post('kode_penyakit'),
-            'tingkat'     => $this->input->post('tingkat'),
-            'nama_penyakit'     => $this->input->post('nama_penyakit')
+            'nama_konsultasi'   => $this->input->post('nama_konsultasi')
         ];
         $this->Crud_model->edit('tbl_konsultasi', 'id_konsultasi', $id_konsultasi, $data);
-
-        $this->session->set_flashdata('msg', 'Data disimpan');
-
-        redirect('home/diagnosa/rekapJawaban/' . $id_konsultasi . '/' . $kode_penyakit);
+        $this->session->set_flashdata('msg', 'Data Disimpan');
+        redirect('home/diagnosa/rekapJawaban/' . $id_konsultasi);
     }
 
     function hapusData($id_konsultasi)

@@ -73,6 +73,7 @@ class Jenis extends CI_Controller
                         'kode_jenis'   => $i->post('kode'),
                         'nama_jenis'   => $i->post('nama'),
                         'deskripsi'   => $i->post('deskripsi'),
+                        'penanganan'   => $i->post('penanganan'),
                         'gambar'          => $config['upload_path'] . $upload_data['uploads']['file_name']
                     ];
                     $this->Crud_model->add('tbl_jenis', $data);
@@ -139,6 +140,7 @@ class Jenis extends CI_Controller
                         'kode_jenis'   => $i->post('kode'),
                         'nama_jenis'   => $i->post('nama'),
                         'deskripsi'   => $i->post('deskripsi'),
+                        'penanganan'   => $i->post('penanganan'),
                         'gambar'          => $config['upload_path'] . $upload_data['uploads']['file_name']
                     ];
                     $this->Crud_model->edit('tbl_jenis', 'kode_jenis', $kode_jenis, $data);
@@ -151,6 +153,7 @@ class Jenis extends CI_Controller
                 $data = [
                     'kode_jenis'   => $i->post('kode'),
                     'nama_jenis'   => $i->post('nama'),
+                    'penanganan'   => $i->post('penanganan'),
                     'deskripsi'   => $i->post('deskripsi')
                 ];
                 $this->Crud_model->edit('tbl_jenis', 'kode_jenis', $kode_jenis, $data);

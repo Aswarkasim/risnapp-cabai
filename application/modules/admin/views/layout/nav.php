@@ -35,11 +35,11 @@ $role = $this->session->userdata('role');
                         }
                         ?>"><a href="<?php echo base_url('admin/pengetahuan')
                                         ?>"><i class="fa fa-flask"></i> <span>Pengetahuan</span></a></li>
-            <!-- <li class="<?php if ($this->uri->segment(2) == "pasien") {
-                                echo "active";
-                            }
-                            ?>"><a href="<?php echo base_url('admin/pasien')
-                                            ?>"><i class="fa fa-hotel"></i> <span>Riwayat Konsultasi</span></a></li> -->
+            <li class="<?php if ($this->uri->segment(2) == "pasien") {
+                            echo "active";
+                        }
+                        ?>"><a href="<?php echo base_url('admin/konsultasi')
+                                        ?>"><i class="fa fa-leaf"></i> <span>Diagnosa</span></a></li>
 
 
 
@@ -88,7 +88,7 @@ $role = $this->session->userdata('role');
                         ?>"><a href="<?php echo base_url('admin/auth/logout')
                                         ?>" class="tombol-logout"><i class="fa fa-sign-out"></i> <span>Logout</span></a></li>
 
-            <li><a href="<?php echo base_url('') ?>" target="_blank" class=""><i class="fa fa-globe"></i> <span>Home</span></a></li>
+            <li><a href="<?php echo base_url('') ?>" target="_blank" class=""><i class="fa fa-globe"></i> <span>Diagnosa</span></a></li>
 
 
 
