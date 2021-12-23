@@ -44,6 +44,7 @@ $this->load->helper('text');
                     <span class="caret"></span>
                   </button>
                   <ul class="dropdown-menu" role="menu">
+                    <li><a href="<?= base_url('admin/role/index/' . $row->kode_jenis) ?>"><i class="fa fa-exchange"></i> Atur Role</a></li>
                     <li><a href="<?= base_url($edit . $row->kode_jenis) ?>"><i class="fa fa-edit"></i> Edit</a></li>
                     <li><a href="<?= base_url($delete . $row->kode_jenis) ?>"><i class="fa fa-trash"></i>Hapus</a></li>
                   </ul>

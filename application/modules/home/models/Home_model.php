@@ -19,9 +19,29 @@ class Home_model extends CI_Model
     {
         $this->db->select('tbl_konsultasi.*, tbl_jenis.*')
             ->from('tbl_konsultasi')
-            ->join('tbl_jenis', 'tbl_jenis.kode_jenis = tbl_konsultasi.kode_penyakit', 'left')
+            ->join('tbl_jenis', 'tbl_jenis.kode_jenis = tbl_konsultasi.kode_jenis', 'left')
             ->where('id_konsultasi', $id_konsultasi);
         return $this->db->get()->row();
+    }
+
+    function listPilihDiagnosa($id_konsultasi)
+    {
+        $this->db->select('
+                            tbl_diagnosa.*, 
+                            tbl_gejala.nama_gejala
+                            ')
+            ->from('tbl_diagnosa')
+            ->join('tbl_gejala', 'tbl_gejala.kode_gejala = tbl_diagnosa.kode_gejala', 'left')
+            ->where('tbl_diagnosa.id_konsultasi', $id_konsultasi);
+        return $this->db->get()->result();
+    }
+
+    function cekGejala($id_konsultasi, $kode_gejala)
+    {
+        return $this->db->select('*')
+            ->from('tbl_diagnosa')
+            ->where('id_konsultasi', $id_konsultasi)
+            ->where('kode_gejala', $kode_gejala)->get()->row();
     }
 
     public function listDiagnosaKonsultasi($id_konsultasi)
@@ -49,11 +69,11 @@ class Home_model extends CI_Model
         return $this->db->get()->row();
     }
 
-    function listPenanganan($kode_penyakit, $tingkat)
+    function listPenanganan($kode_jenis, $tingkat)
     {
         $this->db->select('*')
             ->from('tbl_penanganan')
-            ->where('kode_jenis', $kode_penyakit)
+            ->where('kode_jenis', $kode_jenis)
             ->where('tingkat', $tingkat);
         return $this->db->get()->row();
     }
@@ -64,9 +84,53 @@ class Home_model extends CI_Model
             ->from('tbl_konsultasi')
             ->where('nama_konsultasi', '')
             ->where('akumulasi_cf', '0')
-            ->where('kode_penyakit', '')
-            ->where('nama_penyakit', '')
+            ->where('kode_jenis', '')
+            ->where('nama_jenis', '')
             ->get();
         return $query->row();
+    }
+
+
+    function listDiagnosaRole($id_konsultasi)
+    {
+        $this->db->select('
+                            tbl_diagnosa.*, 
+                            tbl_role.kode_jenis
+                            ')
+            ->from('tbl_diagnosa')
+            ->join('tbl_role', 'tbl_role.kode_gejala = tbl_diagnosa.kode_gejala', 'left')
+            ->where('tbl_diagnosa.id_konsultasi', $id_konsultasi);
+        return $this->db->get()->result();
+    }
+
+
+    function listDiagnosaRoleByPenyakit($id_konsultasi, $kode_jenis)
+    {
+        $this->db->select('
+                            tbl_diagnosa.*, 
+                            tbl_role.kode_jenis
+                            ')
+            ->from('tbl_diagnosa')
+            ->join('tbl_role', 'tbl_role.kode_gejala = tbl_diagnosa.kode_gejala', 'left')
+            ->where('tbl_diagnosa.id_konsultasi', $id_konsultasi)
+            ->where('tbl_diagnosa.kode_jenis', $kode_jenis);
+        return $this->db->get()->result();
+    }
+
+    function dataDiagnosaByPasien($id_konsultasi, $kode_gejala)
+    {
+        $this->db->select('*')
+            ->from('tbl_diagnosa')
+            ->where('tbl_diagnosa.id_konsultasi', $id_konsultasi)
+            ->where('kode_gejala', $kode_gejala);
+        return $this->db->get()->row();
+    }
+
+    function groupPenyakit()
+    {
+        return $this->db->select('*')
+            ->from('tbl_role')
+            ->group_by('kode_jenis')
+            ->get()->result();
     }
 }

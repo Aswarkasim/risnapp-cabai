@@ -16,6 +16,6 @@
   <!-- Bootstrap core CSS -->
   <link href="<?= base_url('assets/home/'); ?>css/bootstrap-mytheme.css" rel="stylesheet">
   <link rel="stylesheet" href="<?= base_url('assets/admin/') ?>bower_components/font-awesome/css/font-awesome.min.css">
-
+  <script src="<?= base_url('assets/admin/') ?>bower_components/jquery/dist/jquery.min.js"></script>
 
   <meta name="theme-color" content="#7952b3">

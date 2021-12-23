@@ -17,6 +17,14 @@ function is_logged_in_user()
     }
 }
 
+function printr_pretty($value)
+{
+    echo "<pre>";
+    print_r($value);
+    echo "</pre>";
+    // die;
+}
+
 function post($name)
 {
     $ci = get_instance();

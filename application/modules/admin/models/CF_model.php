@@ -15,6 +15,21 @@ class CF_model extends CI_Model
         return $this->db->get()->result();
     }
 
+    function listRole($kode_jenis)
+    {
+        $this->db->select('
+                            tbl_role.*, 
+                            tbl_jenis.nama_jenis,
+                            tbl_gejala.nama_gejala,
+                            ')
+            ->from('tbl_role')
+            ->join('tbl_jenis', 'tbl_jenis.kode_jenis = tbl_role.kode_jenis', 'left')
+            ->join('tbl_gejala', 'tbl_gejala.kode_gejala = tbl_role.kode_gejala', 'left')
+            ->where('tbl_role.kode_jenis', $kode_jenis)
+            ->order_by('tbl_role.kode_gejala', 'ASC');
+        return $this->db->get()->result();
+    }
+
     // public function listPasien()
     // {
     //     $this->db->select('tbl_pasien.*, tbl_jenis.*, tbl_gejala.*')
@@ -32,7 +47,7 @@ class CF_model extends CI_Model
     //                         tbl_jenis.penanganan,
     //                         ')
     //         ->from('tbl_pasien')
-    //         ->join('tbl_jenis', 'tbl_jenis.kode_jenis = tbl_pasien.kode_penyakit', 'left')
+    //         ->join('tbl_jenis', 'tbl_jenis.kode_jenis = tbl_pasien.kode_jenis', 'left')
     //         ->order_by('tbl_pasien.tgl_update', 'DESC');
     //     return $this->db->get()->result();
     // }
@@ -45,7 +60,7 @@ class CF_model extends CI_Model
                             tbl_jenis.penanganan,
                             ')
             ->from('tbl_konsultasi')
-            ->join('tbl_jenis', 'tbl_jenis.kode_jenis = tbl_konsultasi.kode_penyakit', 'left')
+            ->join('tbl_jenis', 'tbl_jenis.kode_jenis = tbl_konsultasi.kode_jenis', 'left')
             ->order_by('tbl_konsultasi.tgl_update', 'DESC');
         return $this->db->get()->result();
     }
@@ -58,7 +73,7 @@ class CF_model extends CI_Model
                             tbl_jenis.penanganan,
                             ')
             ->from('tbl_pasien')
-            ->join('tbl_jenis', 'tbl_jenis.kode_jenis = tbl_pasien.kode_penyakit', 'left')
+            ->join('tbl_jenis', 'tbl_jenis.kode_jenis = tbl_pasien.kode_jenis', 'left')
             ->where('tbl_pasien.tgl_update >=', $start)
             ->where('tbl_pasien.tgl_update <=', $end)
             ->order_by('tbl_pasien.tgl_update', 'DESC');

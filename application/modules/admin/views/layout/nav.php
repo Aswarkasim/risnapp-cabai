@@ -30,11 +30,11 @@ $role = $this->session->userdata('role');
                         }
                         ?>"><a href="<?php echo base_url('admin/gejala')
                                         ?>"><i class="fa fa-heartbeat"></i> <span>Gejala</span></a></li>
-            <li class="<?php if ($this->uri->segment(2) == "pengetahuan") {
-                            echo "active";
-                        }
-                        ?>"><a href="<?php echo base_url('admin/pengetahuan')
-                                        ?>"><i class="fa fa-flask"></i> <span>Pengetahuan</span></a></li>
+            <!-- <li class="<?php if ($this->uri->segment(2) == "pengetahuan") {
+                                echo "active";
+                            }
+                            ?>"><a href="<?php echo base_url('admin/pengetahuan')
+                                        ?>"><i class="fa fa-flask"></i> <span>Pengetahuan</span></a></li> -->
             <li class="<?php if ($this->uri->segment(2) == "pasien") {
                             echo "active";
                         }

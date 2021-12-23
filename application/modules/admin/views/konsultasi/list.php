@@ -12,7 +12,8 @@
         <a href="<?= base_url($add) ?>" class="btn btn-primary"><i class="fa fa-plus"></i> Tambah</a>
       </p> -->
 
-      <?php include('cetak_modal.php') ?>
+      <?php //include('cetak_modal.php') 
+      ?>
       <br>
       <table class="table table table-bordered table-striped DataTable">
         <thead>
@@ -32,7 +33,7 @@
               <td><?= $no ?></td>
               <td><?= $row->nama_konsultasi ?></td>
               <td><?= $row->akumulasi_cf ?></td>
-              <td><?= $row->nama_penyakit ?></td>
+              <td><?= $row->nama_jenis ?></td>
               <td>
                 <div class="btn-group">
                   <button type="button" class="btn btn-danger btn-flat"><i class="fa fa-cogs"></i></button>
