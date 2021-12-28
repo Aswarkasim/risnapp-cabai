@@ -10,7 +10,7 @@ class Diagnosa extends CI_Controller
     {
         parent::__construct();
         $this->load->model('home/Home_model', 'HM');
-        $this->load->model('home/Cf_home', 'CF');
+        $this->load->model('Cf_home', 'CF');
     }
 
 
