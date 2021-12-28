@@ -10,6 +10,7 @@ class Diagnosa extends CI_Controller
     {
         parent::__construct();
         $this->load->model('home/Home_model', 'HM');
+        $this->load->model('home/CF_home', 'CF');
     }
 
 
@@ -143,7 +144,7 @@ class Diagnosa extends CI_Controller
     function proses($id_konsultasi)
     {
 
-        $this->load->model('home/CF_home', 'CF');
+
 
         $diagnosa = $this->HM->listDiagnosaRole($id_konsultasi);
         // printr_pretty($diagnosa);
