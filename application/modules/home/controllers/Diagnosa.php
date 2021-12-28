@@ -197,10 +197,9 @@ class Diagnosa extends CI_Controller
         // printr_pretty($kode_jenis);
         // die();
 
-        $konsultasi = $this->Crud_model->listingOne('tbl_konsultasi', 'id_konsultasi', $id_konsultasi);
-        $jenis = $this->Crud_model->listingOne('tbl_jenis', 'kode_jenis', $konsultasi->kode_jenis);
 
         // $cf = $this->CF->hitung_cf($dataDiagnosa);
+        $jenis = $this->Crud_model->listingOne('tbl_jenis', 'kode_jenis', $kp);
 
         $dataPasien = [
             'akumulasi_cf'     => $max_cf,
@@ -210,8 +209,9 @@ class Diagnosa extends CI_Controller
 
         $this->Crud_model->edit('tbl_konsultasi', 'id_konsultasi', $id_konsultasi, $dataPasien);
 
-
-
+        $konsultasi = $this->Crud_model->listingOne('tbl_konsultasi', 'id_konsultasi', $id_konsultasi);
+        // printr_pretty($konsultasi);
+        // die;
 
         $data = array(
             'title'         => 'Hasil Diagnosa',
