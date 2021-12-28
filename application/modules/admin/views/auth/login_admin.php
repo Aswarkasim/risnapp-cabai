@@ -19,10 +19,10 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 
-<body class="hold-transition login-page">
+<body class="hold-transition login-page" style="background-image: url(<?= base_url('assets/img/bg.jpg'); ?>); repeat: no-repeat">
     <div class="login-box">
         <div class="login-logo">
-            <a href="<?= base_url('assets/admin/') ?>index2.html"><b>SELAMAT</b> DATANG</a>
+            <a href="<?= base_url('assets/admin/') ?>" style="color: white"><b>SELAMAT</b> DATANG</a>
         </div>
         <!-- /.login-logo -->
         <div class="login-box-body">
