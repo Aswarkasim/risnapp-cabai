@@ -32,7 +32,8 @@ class Home_model extends CI_Model
                             ')
             ->from('tbl_diagnosa')
             ->join('tbl_gejala', 'tbl_gejala.kode_gejala = tbl_diagnosa.kode_gejala', 'left')
-            ->where('tbl_diagnosa.id_konsultasi', $id_konsultasi);
+            ->where('tbl_diagnosa.id_konsultasi', $id_konsultasi)
+            ->group_by('tbl_diagnosa.kode_gejala');
         return $this->db->get()->result();
     }
 

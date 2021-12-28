@@ -112,13 +112,17 @@ class Diagnosa extends CI_Controller
         $gejala = $this->Crud_model->listingOne('tbl_gejala', 'kode_gejala', $kode_gejala);
         // print_r($value * $gejala->nilai_cf);
         // die;
-        $data = [
-            'id_konsultasi'     => $id_konsultasi,
-            'kode_gejala'   => $gejala->kode_gejala,
-            'nilai_cf'            => $value,
-            'cf_hasil'            => $value * $gejala->nilai_cf
-        ];
-        $this->Crud_model->add('tbl_diagnosa', $data);
+        $role = $this->Crud_model->listingOneAll('tbl_role', 'kode_gejala', $kode_gejala);
+        foreach ($role as $row) {
+            $data = [
+                'id_konsultasi'         => $id_konsultasi,
+                'kode_gejala'           => $row->kode_gejala,
+                'kode_jenis'           => $row->kode_jenis,
+                'nilai_cf'            => $value,
+                'cf_hasil'            => $value * $gejala->nilai_cf
+            ];
+            $this->Crud_model->add('tbl_diagnosa', $data);
+        }
         redirect('home/diagnosa/ask/' . $id_konsultasi);
     }
 
@@ -144,6 +148,9 @@ class Diagnosa extends CI_Controller
         $diagnosa = $this->HM->listDiagnosaRole($id_konsultasi);
         // printr_pretty($diagnosa);
 
+
+        $max_cf = 0;
+        $kp = '';
         foreach ($diagnosa as $d) {
             // echo $d->kode_jenis . '<br>';
 
@@ -156,6 +163,7 @@ class Diagnosa extends CI_Controller
                         $data = [
                             'id_konsultasi'     => $id_konsultasi,
                             'kode_gejala'   => $r->kode_gejala,
+                            'kode_jenis'   => $r->kode_jenis,
                             'nilai_cf'      => 0,
                             'cf_hasil'      => 0
                         ];
@@ -167,39 +175,44 @@ class Diagnosa extends CI_Controller
             $jenis = $this->HM->listDiagnosaRoleByPenyakit($id_konsultasi, $d->kode_jenis);
 
             // $cf = $this->CF->hitung_cf($jenis);
+            // printr_pretty($jenis);
+
+            $cf = $this->CF->hitung_cf($jenis);
             // printr_pretty($cf);
+            if ($max_cf <= $cf) {
+                $max_cf = $cf;
+                $kp = $d->kode_jenis;
+            }
         }
+
+        // print_r($max_cf);
+        // die();
 
         // die;
         $dataDiagnosa = $this->HM->listPilihDiagnosa($id_konsultasi);
 
-        $kode_jenis = $this->CF->getValuePenyakit($id_konsultasi);
+        // $kode_jenis = $this->CF->getValuePenyakit($id_konsultasi);
 
 
         // printr_pretty($kode_jenis);
         // die();
 
+        $konsultasi = $this->Crud_model->listingOne('tbl_konsultasi', 'id_konsultasi', $id_konsultasi);
+        $jenis = $this->Crud_model->listingOne('tbl_jenis', 'kode_jenis', $konsultasi->kode_jenis);
 
-        $jenis = $this->Crud_model->listingOne('tbl_jenis', 'kode_jenis', $kode_jenis);
-
-
-
-        $cf = $this->CF->hitung_cf($dataDiagnosa);
-
-
+        // $cf = $this->CF->hitung_cf($dataDiagnosa);
 
         $dataPasien = [
-            'akumulasi_cf'     => $cf,
-            'kode_jenis'    => $kode_jenis,
+            'akumulasi_cf'     => $max_cf,
+            'kode_jenis'    => $kp,
             'nama_jenis'    => $jenis->nama_jenis,
         ];
 
         $this->Crud_model->edit('tbl_konsultasi', 'id_konsultasi', $id_konsultasi, $dataPasien);
-        // print_r($cf);
-        // die;
 
 
-        $konsultasi = $this->Crud_model->listingOne('tbl_konsultasi', 'id_konsultasi', $id_konsultasi);
+
+
         $data = array(
             'title'         => 'Hasil Diagnosa',
             'jenis'      => $jenis,
