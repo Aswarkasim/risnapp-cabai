@@ -2,7 +2,7 @@
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class CF_home extends CI_Model
+class Cf_home extends CI_Model
 {
 
   public function __construct()
