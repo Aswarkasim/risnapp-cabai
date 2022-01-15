@@ -26,18 +26,26 @@ class Welcome extends CI_Controller
 
 		$data = [
 			[
-				'nilai_cf'	=> 0.4,
-				'cf_hasil'	=> 0.4,
+				'nilai_cf'	=> 1.0,
+				'cf_hasil'	=> 0.6,
 			],
 
 			[
-				'nilai_cf'	=> 0.4,
-				'cf_hasil'	=> 0.4,
+				'nilai_cf'	=> 1.0,
+				'cf_hasil'	=> 0.6,
+			],
+			[
+				'nilai_cf'	=> 1.0,
+				'cf_hasil'	=> 0.6,
+			],
+			[
+				'nilai_cf'	=> 0.8,
+				'cf_hasil'	=> 0.6,
 			],
 			[
 				'nilai_cf'	=> 0.4,
-				'cf_hasil'	=> 0.32,
-			],
+				'cf_hasil'	=> 0.8,
+			]
 		];
 
 		echo $this->hitung_cf($data);
